@@ -1,5 +1,6 @@
 #pragma once
 #include "Datatypes.h"
+#include "Memory.h"
 
 // 6502 Proccessor
 struct CPU
@@ -7,7 +8,7 @@ struct CPU
     word PC; // Program Counter
     word SP; // Stack Pointer
 
-    // Three 8 bits registers respectively
+    // Three 8 bits registers 
     byte A; // A -> Accumulator
     byte X; // X -> Index Register X
     byte Y; // Y -> Index Register Y
@@ -25,6 +26,13 @@ struct CPU
     byte N : 1; // MEGATIVE FLAGE 0=POSITIVE 1=NEGATIVE
 
     // opcodes
-    static constexpr byte INS_LDA_IM = 0xA9; // Load Accumulator (Immediate)
+     static constexpr byte INS_LDA_IM = 0xA9; // Load Accumulator (Immediate)
+
+    // Methods
+   void Reset(Memory& mem);
+
+   byte FetchByte(u32& cycles, Memory& memory);
+
+   void Execute(u32 cycles, Memory& memory);
 
 };
